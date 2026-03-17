@@ -1,0 +1,39 @@
+---
+description: Admin control plane rules for React standalone app
+globs:
+  - "erp-admin/**/*"
+alwaysApply: true
+---
+
+## Admin ERP Rules
+
+- **Follow coding conventions** defined in `.claude/rules/admin-coding.md`.
+
+### When modifying or adding admin code
+
+- **Before creating new components/pages**:
+  - Check existing patterns in `erp-admin/src/pages/` for page structure
+  - Check if components exist in `ui-components` library before creating new ones
+  - Follow existing service pattern in `erp-admin/src/services/`
+
+### Key differences from erp-frontend
+
+- Uses **React Router v6** (NOT TanStack Router)
+- **Standalone project** (NOT Nx monorepo) - flat `src/` structure
+- Extends **AdminApiService** (NOT ApiService from @shared)
+- **Admin auth context** separate from main frontend auth
+- Connects to **admin API** on port 3001 (`/admin-api`), NOT main API on port 3000
+
+### Design and implementation constraints
+
+- **Always follow**:
+  - React Hook Form + Zod for all forms
+  - React Query for server state
+  - Service layer pattern (extend `AdminApiService`, never call axios directly)
+  - Tailwind CSS with `tw:` prefix for ALL classes
+  - `ui-components` library for generic components
+  - i18n translation keys for ALL user-facing text
+  - `AdminAuthRoute` for route protection (public/protected)
+  - CSRF token management via axios interceptors
+- **Path aliases**: `@/*` -> `src/*`, `ui-components`, `@ui/*`
+- **Never use**: `any` type, hardcoded strings, `||` for defaults (use `??`)

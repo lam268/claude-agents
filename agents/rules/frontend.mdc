@@ -1,0 +1,37 @@
+---
+description: Frontend ERP rules for React + Nx monorepo
+globs:
+  - "erp-frontend/**/*"
+alwaysApply: true
+---
+
+## Frontend ERP Rules
+
+- **Follow coding conventions** defined in `.claude/rules/frontend-coding.md` and `erp-frontend/CLAUDE.md`.
+
+### When modifying or adding frontend code
+
+- **Before creating new components/pages**:
+  - Check existing patterns in `erp-frontend/CLAUDE.md`
+  - Check if components exist in `ui-components` library before creating new ones
+  - Check domain libraries: `libs/hrm/`, `libs/mes/`, `libs/pm/`, `libs/shared/`
+  - Follow the page structure pattern: `{Module}Page.tsx` + `components/` + `hooks/` + `schemas/`
+
+### Design and implementation constraints
+
+- **Always follow**:
+  - Nx monorepo dependency constraints (HRM/MES/PM only depend on shared)
+  - React Hook Form + Zod for all forms (schemas in `schemas/` directory)
+  - React Query for server state, Context for auth only
+  - Service layer pattern (extend `ApiService`, never call axios directly)
+  - TanStack Router with lazy loading for all routes
+  - Tailwind CSS with `tw:` prefix for ALL classes
+  - `ui-components` library for generic components
+  - `usePermission()` hook / `PermissionGate` for RBAC
+  - `dayjs` for date handling (NEVER date-fns or moment)
+  - i18n translation keys for ALL user-facing text
+  - `useDocumentTitle(t('key'))` for page titles
+- **File size limits**: 200-250 lines target, 300 max, lazy-load dialogs > 400 lines
+- **Hook organization**: `useQuery.ts`, `useMutation.ts`, `hooks.ts`, `index.ts`
+- **Path aliases mandatory**: `@shared/*`, `@hrm/*`, `@mes/*`, `@pm/*`, `@/*`, `ui-components`
+- **Never use**: `any` type, relative imports, hardcoded strings, `||` for defaults (use `??`), inline JSX callbacks

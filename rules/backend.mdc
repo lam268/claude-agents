@@ -1,0 +1,36 @@
+---
+description: Backend ERP rules for NestJS monorepo
+globs:
+  - "erp-backend/**/*"
+alwaysApply: true
+---
+
+## Backend ERP Rules
+
+- **Follow coding conventions** defined in `.claude/rules/backend-coding.md` and `erp-backend/CLAUDE.md`.
+
+### When modifying or adding backend code
+
+- **Before designing new modules/controllers/services**:
+  - Check existing patterns in `erp-backend/CLAUDE.md`
+  - Check existing modules in `libs/shared/src/modules/`, `libs/hrm/src/modules/`, `libs/mes/src/modules/`, `libs/pm/src/modules/`
+  - Follow the Module-Controller-Service pattern consistently
+
+### Design and implementation constraints
+
+- **Do not introduce new architectural patterns** that conflict with documented patterns
+- **Always follow**:
+  - Module-Controller-Service structure
+  - Repository pattern for complex queries
+  - Joi validation in `*.validator.ts` files
+  - class-transformer `@Expose()` for Response DTOs
+  - `EntityMapper` for DTO transformation in controllers
+  - Internationalized responses and errors via `this.i18n.t()`
+  - `BaseService` extension with `@UseTenantFilter()` for all services
+  - `TenantContextService` for multi-tenancy (never pass organId as parameter)
+  - Audit logging for all CUD operations via `AuditService`
+  - `TrimObjectPipe` before `JoiValidationPipe` in controllers
+  - Session-based authentication with `AuthenticatedGuard`
+  - Permission-based authorization with `@RequirePermissions()`
+- **Path aliases are mandatory**: `@common/*`, `@entities/*`, `@modules/*`, `@hrm/*`, `@mes/*`, `@pm/*`
+- **Never use** `console.log` (use `this.logger`), `any` type, relative imports, or hardcoded strings
