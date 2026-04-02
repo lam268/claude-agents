@@ -176,7 +176,9 @@ npm run migration:revert  # Revert last migration
 npm run test              # Unit tests
 npm run test:coverage     # Coverage report
 npm run test:e2e          # E2E tests
-npm run lint              # ESLint
-npm run format            # Prettier
+npm run lint              # oxlint (Rust-based linter)
+npm run fmt               # oxfmt (Rust-based formatter)
+npm run fmt:check         # Check formatting without writing
+make fix                  # Run both oxlint --fix and oxfmt --write
 npm run i18n:check        # Check missing translation keys
 ```

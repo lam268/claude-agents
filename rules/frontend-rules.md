@@ -214,7 +214,7 @@ npm run test             # Vitest
 npm run test:coverage    # Coverage report
 npm run test:e2e         # Playwright E2E
 npm run storybook        # Storybook (port 4400)
-npm run lint             # ESLint
+npm run lint             # oxlint (Rust-based linter)
 ```
 
 ---

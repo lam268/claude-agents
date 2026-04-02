@@ -205,8 +205,8 @@ All pages lazy-loaded with `React.lazy()` + `Suspense`.
 
 ## Code Style
 
-- **Prettier**: `semi: false`, `singleQuote: true`
-- **ESLint**: @typescript-eslint with React hooks rules
+- **oxfmt**: `semi: false`, `singleQuote: true` (Rust-based formatter)
+- **oxlint**: TypeScript, React, and import plugins (Rust-based linter)
 - No `any` type
 - Use `??` instead of `||` for defaults
 - Error handling: `getErrorMessage(error, fallbackMessage)` utility
@@ -232,7 +232,10 @@ npm run build            # Production build
 npm run preview          # Preview build
 npm run test             # Vitest
 npm run test:e2e         # Playwright E2E
-npm run lint             # ESLint
+npm run lint             # oxlint (Rust-based linter)
+npm run fmt              # oxfmt (Rust-based formatter)
+npm run fmt:check        # Check formatting without writing
+make fix                 # Run both oxlint --fix and oxfmt --write
 ```
 
 ---
@@ -257,3 +260,4 @@ VITE_ADMIN_API_URL=http://localhost:3001/admin-api
 - [ ] Protected routes use `AdminAuthRoute`
 - [ ] Error handling with `getErrorMessage()` utility
 - [ ] Toast notifications via `useSnackbar()` or `sonner`
+- [ ] `make fix` passes (oxlint + oxfmt)

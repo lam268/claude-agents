@@ -52,9 +52,9 @@ switch (status) {
 assertNever(status); // Compile error if new status added
 ```
 
-### TS-7: Clear ESLint/cspell Warnings
+### TS-7: Clear oxlint/cspell Warnings
 
-- Comments required when ignoring ESLint warnings
+- Comments required when ignoring oxlint warnings
 - Fix all cspell warnings or add to dictionary
 
 ---
@@ -360,7 +360,7 @@ const { can } = usePermission();
 
 ## Code Quality Checklist
 
-- [ ] No ESLint warnings (or documented ignores)
+- [ ] No oxlint warnings (or documented ignores)
 - [ ] No `any` or `as` without comments
 - [ ] `??` used instead of `||` for defaults
 - [ ] All text uses i18n translation keys
